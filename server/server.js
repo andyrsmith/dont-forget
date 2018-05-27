@@ -1,11 +1,15 @@
+require('./config/config');
+
 var express = require('express');
 var bodyParser = require('body-parser');
+var {mongoose} = require('./db/mongoose');
 
 var app = express();
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Started on port 3000');
 });
 
