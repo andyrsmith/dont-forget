@@ -15,7 +15,7 @@ var Reminder = mongoose.model('Reminder', {
   },
   completed: {
     type: Boolean,
-    default: null
+    default: false
   }
 });
 

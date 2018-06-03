@@ -1,13 +1,18 @@
 const expect = require('expect');
 const request = require('supertest');
-
+const {Reminder} = require('./models/reminder.js');
 const {app} = require('./server');
 
+beforeEach(() => {
+  Reminder.deleteMany({ }, function (err) {
+      if (err) return handleError(err);
+  });
+});
 describe('POST /reminders', () => {
   it('should create a new reminder', (done) => {
     var title = "Pay Bill";
     var description = "This is the electric bill";
-    var dateOfReminder = new Date('2018-5-31');
+    var dateOfReminder = '2018-5-31';
 
     request(app)
       .post('/reminders')
@@ -22,7 +27,13 @@ describe('POST /reminders', () => {
         if (err) {
           return done(err);
         }
-        done();
+
+        Reminder.find({title}).then((reminders) => {
+          expect(reminders.length).toBe(1)
+          expect(reminders[0].description).toBe(description);
+          expect(reminders[0].completed).toBe(false);
+          done();
+        }).catch((e) => done(e)); 
       });
   });
 });
