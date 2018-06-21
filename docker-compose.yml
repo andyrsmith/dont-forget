@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    container_name: node-db
+    image: mongo
+    volumes:
+      - /home/andy/mongo-data:/data/db
+    command: mongod --dbpath /data/db
+    ports:
+      - "27017:27017"
+  web:
+    container_name: node-web
+    image: reminder-nodejs-app
+    command: bin/bash
+    tty: true
+    volumes:
+      - ./:/usr/src/reminder
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
