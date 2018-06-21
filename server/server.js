@@ -22,10 +22,31 @@ app.post('/reminders', (req, res) => {
   });
   reminder.save().then((reminder) => {
     res.send(reminder);
-  }, (e) => {
+  }).catch((e) => {
     res.status(400).send(e);
   });
 });
+
+app.get('/reminders', (req, res) => {
+  Reminder.find().then((reminders) => {
+    res.send(reminders);
+  }).catch((e) => {
+    res.status(400).send(e);
+  });  
+});
+
+app.get('/reminders/:id', (req, res) => {
+  var id = req.params.id;
+
+  Reminder.find({_id: id}).then((reminder) => {
+    if (reminder.length === 0) {
+      res.status(404).send();
+    }
+    res.send({reminder});
+  }).catch((e) => {
+    res.status(400).send(e);
+  }); 
+}); 
 
 module.exports = {app}
 
