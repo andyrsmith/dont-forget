@@ -10,8 +10,7 @@ services:
       - "27017:27017"
   web:
     container_name: node-web
-    image: reminder-nodejs-app
-    command: bin/bash
+    image: reminder-nodejs-app:1.0
     tty: true
     volumes:
       - ./:/usr/src/reminder

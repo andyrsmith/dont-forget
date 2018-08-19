@@ -7,11 +7,15 @@ var {Reminder} = require('./models/reminder.js');
 
 var app = express();
 const port = process.env.PORT;
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(bodyParser.json());
 
 app.listen(port, () => {
-  console.log('Started on port 3000');
+  console.log(`Started on port ${port}`);
 });
 //TODO PUT in routes file
 app.post('/reminders', (req, res) => {
@@ -47,6 +51,6 @@ app.get('/reminders/:id', (req, res) => {
     res.status(400).send(e);
   }); 
 }); 
-
+// Need delete and put
 module.exports = {app}
 

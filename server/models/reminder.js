@@ -10,9 +10,10 @@ var Reminder = mongoose.model('Reminder', {
   description: {
     type: String
   },
-  dateOfReminder: {
-    type: Number,
-  },
+  // Need to figure out date format
+  //dateOfReminder: {
+  //  type: Number,
+  //},
   completed: {
     type: Boolean,
     default: false
