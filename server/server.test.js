@@ -30,7 +30,7 @@ describe('POST /reminders', () => {
 
     request(app)
       .post('/reminders')
-      .send({title, description, dateOfReminder})
+      .send({title, description})
       .expect(200)
       .expect((res) => {
         expect(res.body.title).toBe(title);
