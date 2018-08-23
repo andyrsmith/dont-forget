@@ -1,6 +1,6 @@
 {
   "name": "remember",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Reminder App",
   "main": "index.js",
   "scripts": {
